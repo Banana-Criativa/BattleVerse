@@ -1,6 +1,12 @@
-/.vs
-/Library
-/Logs
-/obj
+#Python section
+/**/__pycache__
+*.pyc
+*.pyo
+
+#Unity section
+/**/.vs
+/**/Library
+/**/Logs
+/**/obj
 *.csproj
 *.sln
