@@ -4,18 +4,20 @@ using UnityEngine;
 
 public enum OptionMode {
     SELECTION,
-    TARGET
+    TARGET,
 }
 
 public class MenuManager : MonoBehaviour {
     public KeyCode charSelectKey = KeyCode.Alpha0;
     public KeyCode turnDeciderKey = KeyCode.T;
+    public KeyCode mapViewKey = KeyCode.M;
     public KeyCode[] charViewKeys = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4 };
     public CharacterBehaviour[] players;
 
     public GameObject charMenu;
     private GameObject charViewGo;
     public GameObject turnView;
+    public GameObject mapView;
 
     public CharacterBattleView charView;
 
@@ -34,6 +36,8 @@ public class MenuManager : MonoBehaviour {
             TargetSelection();
         else if (Input.GetKeyDown(turnDeciderKey))
             ActivateTurnView();
+        else if (Input.GetKeyDown(mapViewKey))
+            ShowMap();
         else {
             for (int i = 0; i < charViewKeys.Length; ++i) {
                 if (Input.GetKeyDown(charViewKeys[i])) charSlct = i;
@@ -46,12 +50,14 @@ public class MenuManager : MonoBehaviour {
     public void TargetSelection() {
         charViewGo.SetActive(false);
         turnView.SetActive(false);
+        mapView.SetActive(false);
         charMenu.SetActive(true);
     }
 
     public void SelectCharacter(int id) {
         charMenu.SetActive(false);
         turnView.SetActive(false);
+        mapView.SetActive(false);
 
         charViewGo.SetActive(true);
         charView.SelectChar(players[id]);
@@ -60,7 +66,15 @@ public class MenuManager : MonoBehaviour {
     public void ActivateTurnView() {
         charViewGo.SetActive(false);
         charMenu.SetActive(false);
+        mapView.SetActive(false);
         turnView.SetActive(true);
+    }
+
+    public void ShowMap() {
+        charViewGo.SetActive(false);
+        charMenu.SetActive(false);
+        turnView.SetActive(false);
+        mapView.SetActive(true);
     }
 
     public void SelectOption(int id) {

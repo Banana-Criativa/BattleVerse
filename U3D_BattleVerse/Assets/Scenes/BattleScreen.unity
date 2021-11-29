@@ -2474,17 +2474,15 @@ MonoBehaviour:
   dirty: 1
   avatar: {fileID: 2800000, guid: 3bc52009ad8a6574bb28c7ac639cb9e0, type: 3}
   damage: 0
-  powerIndex: 6
-  conditionIndex: 7
+  powerIndex: 5
+  conditionIndex: 5
   statusHistory:
   - {x: 0, y: 0, z: 0}
   - {x: 1, y: 1, z: 1}
-  - {x: 2, y: 2, z: 2}
-  - {x: 3, y: 3, z: 3}
-  - {x: 4, y: 4, z: 4}
-  - {x: 5, y: 5, z: 5}
-  - {x: 7, y: 5, z: 6}
-  - {x: 8, y: 5, z: 8}
+  - {x: 1, y: 3, z: 2}
+  - {x: 2, y: 4, z: 3}
+  - {x: 3, y: 5, z: 4}
+  - {x: 4, y: 7, z: 4}
   techniques: []
   maxConditionKnown: {x: 0, y: 0, z: 0}
   maxPowersKnown: {x: 0, y: 0, z: 0}
@@ -4862,7 +4860,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &946639946
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6284,7 +6282,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 7
+  m_Text: 8
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -6818,16 +6816,17 @@ MonoBehaviour:
   avatar: {fileID: 2800000, guid: 92feb2d2db1de754c99f8d1bad1697e8, type: 3}
   damage: 0
   powerIndex: 6
-  conditionIndex: 7
+  conditionIndex: 8
   statusHistory:
   - {x: 0, y: 0, z: 0}
   - {x: 1, y: 1, z: 1}
-  - {x: 2, y: 2, z: 2}
-  - {x: 3, y: 3, z: 3}
-  - {x: 4, y: 4, z: 4}
-  - {x: 5, y: 5, z: 5}
-  - {x: 7, y: 5, z: 6}
-  - {x: 8, y: 5, z: 8}
+  - {x: 1, y: 3, z: 2}
+  - {x: 2, y: 4, z: 3}
+  - {x: 4, y: 5, z: 3}
+  - {x: 4, y: 7, z: 4}
+  - {x: 4, y: 8, z: 6}
+  - {x: 4, y: 10, z: 7}
+  - {x: 4, y: 11, z: 9}
   techniques: []
   maxConditionKnown: {x: 0, y: 0, z: 0}
   maxPowersKnown: {x: 0, y: 0, z: 0}
@@ -7491,7 +7490,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 6
+  m_Text: 7
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -8404,7 +8403,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 7
+  m_Text: 8
 --- !u!222 &1680466880
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9043,6 +9042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charSelectKey: 48
   turnDeciderKey: 116
+  mapViewKey: 109
   charViewKeys: 31000000320000003300000034000000
   players:
   - {fileID: 523826457}
@@ -9051,6 +9051,7 @@ MonoBehaviour:
   - {fileID: 1397863394}
   charMenu: {fileID: 659906324}
   turnView: {fileID: 1872570712}
+  mapView: {fileID: 946639945}
   charView: {fileID: 1466894057}
 --- !u!1 &1832987410
 GameObject:
@@ -9286,7 +9287,7 @@ MonoBehaviour:
   - {fileID: 174634577}
   - {fileID: 1729029332}
   - {fileID: 193848808}
-  speeds: 06000000050000000400000007000000
+  speeds: 07000000050000000400000008000000
   progress:
   - 0
   - 0
@@ -9739,7 +9740,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 7
 --- !u!222 &2005692543
 CanvasRenderer:
   m_ObjectHideFlags: 0
