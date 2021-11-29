@@ -6,12 +6,16 @@ using UnityEngine.UI;
 public class SpeedChallenge : MonoBehaviour {
     public bool trigger;
     public bool animating;
+    // used for aggregating sppeds, ideally with LCM of speeds
+    [SerializeField] protected System.Int64 maxSliderLength = 1;
 
     public float dt;
     public float totalTime = 0;
+    public float prevTime = 0;
     public float fullAnimationTime = 5;
     public float animationTime = 0;
 
+    public Slider roundView;
     public Slider[] progressViews;
     public int[] speeds;
     public float[] progress;
@@ -22,6 +26,11 @@ public class SpeedChallenge : MonoBehaviour {
         // allocate auxiliary memory once
         progress = new float[speeds.Length];
         previous = new float[speeds.Length];
+
+        roundView.wholeNumbers = false;
+        roundView.minValue = 0.0f;
+        roundView.maxValue = 1.0f;
+        roundView.value = 0.0f;
 
         ConfigProgressViews();
     }
@@ -54,21 +63,21 @@ public class SpeedChallenge : MonoBehaviour {
         }
     }
 
-    protected virtual int UpdateProgress() {
+    protected virtual float UpdateProgress() {
         float[] time = new float[progress.Length];
         float diff, minTime = float.MaxValue;
         int i, ret = -1;
 
         for (i = 0; i < progress.Length; ++i) {
-            if (progress[i] >= 1) progress[i] = 0;
+            if (progress[i] >= maxSliderLength) progress[i] -= maxSliderLength;
 
-            diff = (float)(1.0f - progress[i]);
+            diff = (float)(maxSliderLength - progress[i]);
             time[i] = diff / speeds[i];
             if (time[i] < minTime) {
                 ret = i; // whoose turn it is now
                 minTime = time[i];
                 // how much to move by how fast to cover it
-                animationTime = diff * (fullAnimationTime / speeds[i]);
+                animationTime = (diff / maxSliderLength) * (fullAnimationTime / speeds[i]);
             }
         }
 
@@ -77,10 +86,14 @@ public class SpeedChallenge : MonoBehaviour {
             progress[i] += minTime * speeds[i];
         }
 
-        return ret;
+        prevTime = (Mathf.Floor(totalTime) == totalTime) ? 0.0f : roundView.value;
+        totalTime += minTime / maxSliderLength;
+        return minTime;
     }
 
     protected virtual void UpdateView(float delta) {
+        float tmp = (totalTime == Mathf.Floor(totalTime)) ? 1.0f : totalTime - Mathf.Floor(totalTime);
+        roundView.value = Mathf.Lerp(prevTime, tmp, delta);
         for (int i = 0; i < progressViews.Length; ++i) {
             progressViews[i].value = Mathf.Lerp(previous[i], progress[i], delta);
         }

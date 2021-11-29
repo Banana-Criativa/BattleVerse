@@ -9278,10 +9278,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trigger: 0
   animating: 0
+  maxSliderLength: 1
   dt: 0
   totalTime: 0
+  prevTime: 0
   fullAnimationTime: 5
   animationTime: 5
+  roundView: {fileID: 1946070840}
   progressViews:
   - {fileID: 278085130}
   - {fileID: 174634577}
@@ -9308,10 +9311,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trigger: 0
   animating: 0
+  maxSliderLength: 0
   dt: 0
   totalTime: 0
+  prevTime: 0
   fullAnimationTime: 20
   animationTime: 0
+  roundView: {fileID: 1946070840}
   progressViews:
   - {fileID: 278085130}
   - {fileID: 174634577}
@@ -9324,7 +9330,7 @@ MonoBehaviour:
   - 0
   - 0
   previous: []
-  maxSliderLength: 0
+  updateMeasures: 0
 --- !u!1 &1946070838
 GameObject:
   m_ObjectHideFlags: 0
