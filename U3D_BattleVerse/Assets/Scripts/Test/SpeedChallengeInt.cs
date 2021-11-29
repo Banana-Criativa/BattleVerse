@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestSpeedChallengeInt : TestSpeedChallenge {
+public class SpeedChallengeInt : SpeedChallenge {
     // used for aggregating sppeds, ideally with LCM of speeds
     public System.Int64 maxSliderLength = 0;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TestSpeedChallenge : MonoBehaviour {
+public class SpeedChallenge : MonoBehaviour {
     public bool trigger;
     public bool animating;
 
