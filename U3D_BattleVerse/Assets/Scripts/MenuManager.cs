@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour {
     public KeyCode charSelectKey = KeyCode.Alpha0;
     public KeyCode turnDeciderKey = KeyCode.T;
     public KeyCode mapViewKey = KeyCode.M;
+    public KeyCode rollViewKey = KeyCode.R;
     public KeyCode[] charViewKeys = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4 };
     public CharacterBehaviour[] players;
 
@@ -18,6 +19,7 @@ public class MenuManager : MonoBehaviour {
     private GameObject charViewGo;
     public GameObject turnView;
     public GameObject mapView;
+    public GameObject rollView;
 
     public CharacterBattleView charView;
 
@@ -38,6 +40,8 @@ public class MenuManager : MonoBehaviour {
             ActivateTurnView();
         else if (Input.GetKeyDown(mapViewKey))
             ShowMap();
+        else if (Input.GetKeyDown(rollViewKey))
+            ShowRollAssist();
         else {
             for (int i = 0; i < charViewKeys.Length; ++i) {
                 if (Input.GetKeyDown(charViewKeys[i])) charSlct = i;
@@ -51,6 +55,7 @@ public class MenuManager : MonoBehaviour {
         charViewGo.SetActive(false);
         turnView.SetActive(false);
         mapView.SetActive(false);
+        rollView.SetActive(false);
         charMenu.SetActive(true);
     }
 
@@ -58,6 +63,7 @@ public class MenuManager : MonoBehaviour {
         charMenu.SetActive(false);
         turnView.SetActive(false);
         mapView.SetActive(false);
+        rollView.SetActive(false);
 
         charViewGo.SetActive(true);
         charView.SelectChar(players[id]);
@@ -67,6 +73,7 @@ public class MenuManager : MonoBehaviour {
         charViewGo.SetActive(false);
         charMenu.SetActive(false);
         mapView.SetActive(false);
+        rollView.SetActive(false);
         turnView.SetActive(true);
     }
 
@@ -74,7 +81,16 @@ public class MenuManager : MonoBehaviour {
         charViewGo.SetActive(false);
         charMenu.SetActive(false);
         turnView.SetActive(false);
+        rollView.SetActive(false);
         mapView.SetActive(true);
+    }
+
+    public void ShowRollAssist() {
+        charViewGo.SetActive(false);
+        charMenu.SetActive(false);
+        turnView.SetActive(false);
+        mapView.SetActive(false);
+        rollView.SetActive(true);
     }
 
     public void SelectOption(int id) {
