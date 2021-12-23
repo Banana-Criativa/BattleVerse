@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems; // IDragHandler
 
-[RequireComponent(typeof(RectTransform))]
-public class TokenView : MonoBehaviour, IDragHandler {
-    [SerializeField] protected RectTransform me;
-
+public class TokenView : DraggableUI {
     [SerializeField] protected Image background;
+    [SerializeField] protected Sprite sprite;
     [SerializeField] protected Color bgTint;
 
     [SerializeField] protected Text text;
@@ -17,8 +14,8 @@ public class TokenView : MonoBehaviour, IDragHandler {
     [SerializeField] protected Color textColor;
 
     // Start is called before the first frame update
-    void Start() {
-        me = GetComponent<RectTransform>();
+    protected override void Start() {
+        base.Start();
         UpdateView();
     }
 
@@ -26,17 +23,15 @@ public class TokenView : MonoBehaviour, IDragHandler {
     // void Update() {}
 
     public void UpdateView() {
-        background.color = bgTint;
-        text.alignment = align;
-        text.color = textColor;
-        text.text = content;
-    }
+        if(background != null) {
+            background.sprite = sprite;
+            background.color = bgTint;
+        }
 
-    public void OnDrag(PointerEventData eventData) {
-        Vector3 screenPosition = eventData.pointerCurrentRaycast.screenPosition;
-        Vector3 screenOffset = new Vector2(Screen.width, Screen.height) / 2;
-
-        Debug.Log("Coords: " + screenPosition.ToString());
-        me.anchoredPosition = screenPosition - screenOffset;
+        if(text != null) {
+            text.alignment = align;
+            text.color = textColor;
+            text.text = content;
+        }
     }
 }

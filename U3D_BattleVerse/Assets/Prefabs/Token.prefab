@@ -59,10 +59,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac79d56d0b4f70941aafcbf523a733c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  me: {fileID: 0}
   background: {fileID: 1158952001680579990}
+  sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   bgTint: {r: 1, g: 1, b: 1, a: 1}
   text: {fileID: 1158952001767257310}
-  content: D
+  content: +
   align: 4
   textColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &1158952001680579990
@@ -173,4 +175,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: D
+  m_Text: 
