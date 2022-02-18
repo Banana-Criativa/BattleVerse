@@ -44,7 +44,7 @@ class BattleStatus:
 		return [self.strengh, self.speed, self.resistence]
 	
 	def as_direction(self):
-		return [self.update_power()] + self.as_list
+		return [self.update_power()] + self.as_list()
 	
 	def __iadd__(self, bat_stat):
 		self.strengh += bat_stat.strengh
