@@ -4,6 +4,9 @@
 
 __all__ = ['Character']
 
+from . import status
+bstat = status.BattleStatus
+
 import datetime as date_time
 date = date_time.date
 time = date_time.time
@@ -17,16 +20,18 @@ class Character:
 	def __init__(self, **kwargs):
 		self.name = kwargs.get('name', 'Nanashi')
 		self.birth_date = kwargs.get('birth', datetime.now() - timedelta(days=366*18))
+		self.ki = kwargs.get('ki', bstat(strengh=5, speed=5, resistence=5))
 		self.development = []
 	
 	def __str__(self):
 		profile = "\n".join( [
 			"\n\tName: " + self.name,
 			"\tBirthday: " + self.birth_date.strftime("%d/%m/%Y"),
+			"\tKi: " + self.ki.__repr__() + "\n"
 			"\tDevelopment: " + str(self.development) + "\n"
 		] )
 		
 		return profile
 	
 	def __repr__(self):
-		return "[{0}] {1} Ki:{2}".format("Human", self.name, 5)
+		return "[{0}] {1} Ki:{2}".format("Human", self.name, self.ki.power)
