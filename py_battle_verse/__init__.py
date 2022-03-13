@@ -2,8 +2,12 @@
 #   Base file for prototyping Package BattleVerse
 ################################################################################
 
-from .character import Character
 from . import status
+from . import character
+from . import tools
+from . import directions
+
+Character = character.Character
 
 __test__ = {
 	'status': status,
