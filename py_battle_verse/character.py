@@ -4,9 +4,6 @@
 
 __all__ = ['Character']
 
-from . import status
-bstat = status.BattleStatus
-
 import datetime as date_time
 date = date_time.date
 time = date_time.time
@@ -18,6 +15,7 @@ class Character:
 	"""base class for character creation in RPG"""
 	
 	def __init__(self, **kwargs):
+		from .status import BattleStatus as bstat
 		self.name = kwargs.get('name', 'Nanashi')
 		self.birth_date = kwargs.get('birth', datetime.now() - timedelta(days=366*18))
 		self.ki = kwargs.get('ki', bstat(strengh=5, speed=5, resistence=5))

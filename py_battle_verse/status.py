@@ -30,7 +30,7 @@ class BattleStatus:
 		return '[{0}] ({1}, {2}, {3})'.format(self.power, self.strengh, self.speed, self.resistence)
 	
 	def update_power(self):
-		self.power = sum([self.strengh, self.speed, self.resistence])/3
+		self.power = sum([self.strengh, self.speed, self.resistence]) // 3
 		return self.power
 	
 	def update(self, atk=0, spd=0, res=0):
