@@ -2,13 +2,16 @@
 #   Base file for prototyping Package BattleVerse
 ################################################################################
 
-from . import status # imports nothing else
-from . import tools # imports nothing else
 from . import directions # imports nothing else
+from . import status # imports nothing else
+
+from . import tools # imports from directions
 
 from . import character # imports from status
 from . import technique # imports from status
-from . import style # imports from technique
+
+from . import species # imports from tools
+from . import style # imports from tools, technique
 
 Character = character.Character
 
