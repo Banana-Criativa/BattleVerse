@@ -42,10 +42,12 @@ class Style:
 		return '{0} ({1} ranks)'.format(self.name, len(self.ranks))
 	
 	def __str__(self):
-		msg = [ 'Style {0}\n'.format(self.name),
-			'\tranks ({0}): {1}'.format(len(self.ranks), self.ranks),
+		msg = [ 'Style: {0} ({1})'.format(self.name, sum(self.ranks)),
+			'ranks ({0}): {1}'.format(len(self.ranks), self.ranks),
+		] + [
+			'\t{0}'.format(t) for t in self.techniques
 		]
-		return ''.join(msg)
+		return '\n'.join(msg)
 
 ################################################################################
 kihap_styles = [

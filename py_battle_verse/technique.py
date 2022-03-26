@@ -14,11 +14,10 @@ class Technique:
 		return conditioning.battle_status >= self.status and energy.measure >= self.status.power
 	
 	def as_list(self):
-		return [self.attack(), self.speed(), self.resistence()]
+		return self.status.as_list()
 	
 	def as_direction(self):
-		listed = self.as_list()
-		return [self.status.update_power()] + listed
+		return self.status.as_direction()
 	
 	def attack(self):
 		return self.status.strengh

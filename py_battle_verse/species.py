@@ -119,9 +119,9 @@ class Species:
 	
 	def __str__(self):
 		msg = [ 'Specie: {0}'.format(self.name),
-			'life: {0}'.format(self.life),
-			'power: {0}'.format(self.power),
-			'development: {0}'.format(self.development),
+			'\tlife: {0}'.format(self.life),
+			'\tpower: {0}'.format(self.power),
+			'\tdevelopment: (1..{0}) + {1}'.format(self.chroma, self.development[self.chroma:]),
 		]
 		return '\n'.join(msg)
 	
@@ -133,6 +133,9 @@ Species() # this call creates the Sapiens species
 Species(development= list(range(1,24)) + [2,3,2], name='Afar')
 Species(development= list(range(1,24)) + [2,3,3], name='Floren')
 Species(development= list(range(1,24)) + [2,3,3,2], name='Orthias')
+Species(development= list(range(1,24)) + [2,3,2,2,2], name='Neander')
+Species(development= list(range(1,24)) + [2,3,3,2,2,2], name='Norsk')
+Species(development= list(range(1,24)) + [2,3]*3, name='Gyges')
 Species(development= list(range(1,24)) + [2,1,3,3,2], name='Latius')
 Species(development= list(range(1,24)) + [4,2,3,3,2], name='Dutch')
 ################################################################################
