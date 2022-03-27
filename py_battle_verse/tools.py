@@ -22,6 +22,10 @@ def dev_cost_dict(dev_dict):
 def add_triplets(triplets):
 	return tuple(map(sum, zip(*triplets)))
 
+def shift_sequence(sequence, shft):
+	shft = shft % len(sequence)
+	return sequence[shft:] + sequence[:shft]
+
 def remove_listed_from_list(list_rem, list_from):
 	list_from = list(list_from)
 	for x in list_rem:
@@ -44,6 +48,7 @@ def fit_list(sequence):
 	
 	return tech
 
+# called from fit_list(sequence)
 def split_list(seq, ranks):
 	count = len(seq)
 	div = 1
