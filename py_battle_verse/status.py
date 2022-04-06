@@ -8,10 +8,10 @@
 
 example usage:
 
->>> BattleStatus(strengh=2, speed=2, resistence=5)
+>>> BattleStatus(strength=2, speed=2, resistance=5)
 [3.0] (2, 2, 5)
 
->>> BattleStatus(strengh=0, speed=0, resistence=6) * 2
+>>> BattleStatus(strength=0, speed=0, resistance=6) * 2
 [4.0] (0, 0, 12)
 '''
 
@@ -19,42 +19,42 @@ class BattleStatus:
 	'''Minimal status information for immediate actions
 	'''
 	def __init__(self, **kwargs):
-		self.strengh = kwargs.get('strengh', 0)
+		self.strength = kwargs.get('strength', 0)
 		self.speed = kwargs.get('speed', 0)
-		self.resistence = kwargs.get('resistence', 0)
+		self.resistance = kwargs.get('resistance', 0)
 		self.power = 0 # set in self.update_power()
 		
 		self.update_power()
 	
 	def __repr__(self):
-		return '[{0}] ({1}, {2}, {3})'.format(self.power, self.strengh, self.speed, self.resistence)
+		return '[{0}] ({1}, {2}, {3})'.format(self.power, self.strength, self.speed, self.resistance)
 	
 	def update_power(self):
-		self.power = sum([self.strengh, self.speed, self.resistence]) // 3
+		self.power = sum([self.strength, self.speed, self.resistance]) // 3
 		return self.power
 	
 	def update(self, atk=0, spd=0, res=0):
-		self.strengh = atk
+		self.strength = atk
 		self.speed = spd
-		self.resistence = res
+		self.resistance = res
 		self.update_power()
 		return self
 	
 	def as_list(self):
-		return [self.strengh, self.speed, self.resistence]
+		return [self.strength, self.speed, self.resistance]
 	
 	def as_direction(self):
 		return [self.update_power()] + self.as_list()
 	
 	def __iadd__(self, bat_stat):
-		self.strengh += bat_stat.strengh
+		self.strength += bat_stat.strength
 		self.speed += bat_stat.speed
-		self.resistence += bat_stat.resistence
+		self.resistance += bat_stat.resistance
 		self.update_power()
 		return self
 	
 	def __add__(self, bat_stat):
-		result = BattleStatus(strengh=self.strengh, speed=self.speed, resistence=self.resistence)
+		result = BattleStatus(strength=self.strength, speed=self.speed, resistance=self.resistance)
 		result += bat_stat
 		return result
 	
@@ -62,14 +62,14 @@ class BattleStatus:
 		return bat_stat.__add__(self)
 	
 	def __isub__(self, bat_stat):
-		self.strengh -= bat_stat.strengh
+		self.strength -= bat_stat.strength
 		self.speed -= bat_stat.speed
-		self.resistence -= bat_stat.resistence
+		self.resistance -= bat_stat.resistance
 		self.update_power()
 		return self
 	
 	def __sub__(self, bat_stat):
-		result = BattleStatus(strengh=self.strengh, speed=self.speed, resistence=self.resistence)
+		result = BattleStatus(strength=self.strength, speed=self.speed, resistance=self.resistance)
 		result -= bat_stat
 		return result
 	
@@ -77,14 +77,14 @@ class BattleStatus:
 		return bat_stat.__sub__(self)
 	
 	def __imul__(self, value):
-		self.strengh *= value
+		self.strength *= value
 		self.speed *= value
-		self.resistence *= value
+		self.resistance *= value
 		self.update_power()
 		return self
 	
 	def __mul__(self, value):
-		result = BattleStatus(strengh=self.strengh, speed=self.speed, resistence=self.resistence)
+		result = BattleStatus(strength=self.strength, speed=self.speed, resistance=self.resistance)
 		result *= value
 		return result
 	

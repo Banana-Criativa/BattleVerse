@@ -14,6 +14,7 @@ from . import style # imports from tools, technique
 from . import character # imports from status, species, style
 
 _m_list = [directions, status, tools, technique, species, style, character]
+Technique = technique.Technique
 Species = species.Species
 Character = character.Character
 
@@ -22,10 +23,11 @@ __test__ = {
 }
 
 def reload():
-	global Species, Character
+	global Technique, Species, Character
 	from importlib import reload
 	for m in _m_list:
 		reload(m)
+	Technique = technique.Technique
 	Species = species.Species
 	Character = character.Character
 

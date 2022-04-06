@@ -25,9 +25,16 @@ class Style:
 		for x in self.directions:
 			steps += steps_from_direction(x)
 		aux = [ sum(self.ranks[:x]) for x in range(len(self.ranks)+1) ]
+		# temporarily store triplets to get or instantiate techniques
 		self.techniques = [ add_triplets( steps[3*aux[x]:3*aux[x+1]] ) for x in range(len(aux)-1) ]
+		# now we get the final form for this data field
 		self.techniques = [
-			Technique(name='{0}_{1}'.format(self.name, x), attack=self.techniques[x][0], speed=self.techniques[x][1], resistence=self.techniques[x][2])
+			Technique.get(
+				name='{0}_{1}'.format(self.name, x),
+				attack=self.techniques[x][0],
+				speed=self.techniques[x][1],
+				resistance=self.techniques[x][2]
+			)
 			for x in range(len(self.techniques))
 		]
 		
