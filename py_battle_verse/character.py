@@ -22,7 +22,7 @@ class Character:
 		
 		self.name = kwargs.get('name', 'Nanashi')
 		self.birth_date = kwargs.get('birth', datetime.now() - timedelta(days=366*18))
-		self.ki = kwargs.get('ki', bstat(strengh=5, speed=5, resistence=5))
+		self.ki = kwargs.get('ki', bstat(strength=5, speed=5, resistance=5))
 		self.species = kwargs.get('species', [ Species.known['Sapiens'] ])
 		self.styles = kwargs.get('style', [ Style(name=self.name, sequence=str_to_dev(self.name)) ])
 		self.development = []
