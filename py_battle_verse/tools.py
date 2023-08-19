@@ -44,7 +44,7 @@ def fit_list(sequence):
 		for x in range(ranks, len(sequence)):
 			tech[x%ranks] += sequence[x]
 	elif len(sequence) < ranks:
-		tech = split_list(sequence, ranks)
+		tech = colapse_split_list( split_list(sequence, ranks) )
 	
 	return tech
 
@@ -64,14 +64,16 @@ def split_list(seq, ranks):
 			count += len(aux[id]) - aux[id].count(0)
 			if count >= ranks:
 				break
+	return aux
 	
-	count = len(aux[0])
-	for x in aux:
+def colapse_split_list(split_list):
+	count = len(split_list[0])
+	for x in split_list:
 		x.reverse()
 		if len(x) < count:
 			x.append(0)
-	result = map(list, zip(*aux))
 	
+	result = map(list, zip(*split_list))
 	return [r for q in result for r in q if r > 0]
 
 def steps_from_direction(direction):

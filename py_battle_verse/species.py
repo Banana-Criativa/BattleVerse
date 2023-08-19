@@ -2,7 +2,7 @@
 ################	Species management section	################
 ################################################################################
 
-def speciesFromBlocks( blocks, development=None, name=None ):
+def species_from_blocks( blocks, development=None, name=None ):
 	'''Receives either a dict or a list as input to generate new species data'''
 	from .tools import dev_cost, list_product
 	
@@ -16,23 +16,24 @@ def speciesFromBlocks( blocks, development=None, name=None ):
 	
 	if type(blocks)==dict:
 		if sum([1 if type(x)==int and type(blocks[x])==int else 0 for x in blocks]) < len(blocks):
-			print('ERROR: speciesFromBlocks(dict) expects a dict with integer keys and values')
+			print('ERROR: species_from_blocks(dict) expects a dict with integer keys and values')
 			return None
 		# convert dict into list
 		blocks = [blocks[x+1] if (x+1) in blocks else 1 for x in range(max(blocks.keys()))]
 	elif type(blocks)==list:
 		if sum([1 if type(x)==int else 0 for x in blocks]) < len(blocks):
-			print('ERROR: speciesFromBlocks(list) expects a list with integer values')
+			print('ERROR: species_from_blocks(list) expects a list with integer values')
 			return None
 	else:
-		print('ERROR: speciesFromBlocks(...) expects one argument, dict or list')
+		print('ERROR: species_from_blocks(...) expects one argument, dict or list')
 		return None
 	
 	total = sum(blocks)
 	stages = total - len(blocks)
 	active = len(blocks) - blocks.count(1)
 	level_multiplier = dev_cost(blocks)
-	life_stage = stages * active
+	# life_stage = stages * active # original formula
+	life_stage = total**0.5 + stages # adjusted for sibling species
 	species = {
 		'blocks': blocks,
 		'total': total,
@@ -44,10 +45,10 @@ def speciesFromBlocks( blocks, development=None, name=None ):
 			'cost': level_multiplier
 		},
 		'life': {
-			'stage': life_stage,
-			'span': level_multiplier * life_stage,
-			'adult': life_stage * min([(x+1) for x in range(len(blocks)) if blocks[x]>1]),
-			'senior': life_stage * sum([(x+1) for x in range(len(blocks)) if blocks[x]>1])
+			'stage': int(life_stage),
+			'span': int(level_multiplier * life_stage),
+			'adult': int(life_stage * min([(x+1) for x in range(len(blocks)) if blocks[x]>1])),
+			'senior': int(life_stage * sum([(x+1) for x in range(len(blocks)) if blocks[x]>1]))
 		},
 		'name': name if name!=None else 'unkwnown'
 	}
@@ -73,9 +74,9 @@ class Species:
 	
 	known = {} # class member, not instantiated per object
 	
-	def FromBlocks( self, blocks, development=None, name=None ):
+	def from_blocks( self, blocks, development=None, name=None ):
 		'''Receives either a dict or a list as input to generate new species data'''
-		species = speciesFromBlocks( blocks, development, name)
+		species = species_from_blocks( blocks, development, name)
 		self.blocks = species['blocks']
 		self.chroma = len(self.blocks)
 		self.total = species['total']
@@ -87,7 +88,7 @@ class Species:
 		self.development = species['development']
 		return self
 	
-	def StatusFromAge(self, today, birthday):
+	def status_from_age(self, today, birthday):
 		'uses the arguments as today and birthday to calculate respective to the species'
 		from math import floor, ceil
 		from status import Status
@@ -113,7 +114,7 @@ class Species:
 		return Status(measure=int(power), xp=int(xp_to_next), development=list(self.development))
 	
 	def __init__(self, **kwargs):
-		self.FromBlocks(kwargs.get('blocks', None), kwargs.get('development', list(range(1,24)) + [2,3,3,2,2]), kwargs.get('name', 'Sapiens'))
+		self.from_blocks(kwargs.get('blocks', None), kwargs.get('development', list(range(1,24)) + [2,3,3,2,2]), kwargs.get('name', 'Sapiens'))
 		if self.name not in Species.known:
 			Species.known[self.name] = self
 	
@@ -138,4 +139,5 @@ Species(development= list(range(1,24)) + [2,3,3,2,2,2], name='Norsk')
 Species(development= list(range(1,24)) + [2,3]*3, name='Gyges')
 Species(development= list(range(1,24)) + [2,1,3,3,2], name='Latius')
 Species(development= list(range(1,24)) + [4,2,3,3,2], name='Dutch')
+Species(development= list(range(1,24)) + list(range(1,4))*4, name='Saiya')
 ################################################################################

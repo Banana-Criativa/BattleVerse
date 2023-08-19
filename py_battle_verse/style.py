@@ -43,15 +43,53 @@ class Style:
 		
 		return self
 	
+	def from_techniques(self, techniques):
+		'''test this with:
+		(10,1,10) and (1,10,1) for splitting
+		(0,0,6), (0,6,0) and (6,0,0) for folding'''
+		self.directions = [t.as_list() for t in techniques]
+		# get directions' milestones
+		self.directions = [ add_triplets( self.directions[:x+1] ) for x in range(len(self.directions))]
+		
+		self.techniques = techniques
+		sequence = [t.power() for t in techniques]
+		len_seq = len(sequence)
+		self.ranks = fit_list(sequence)
+		if self.ranks < len_seq:
+			# temporarily store triplets to get or instantiate techniques
+			# TO DO: fold list
+			# now we get the final form for this data field
+			self.techniques = [
+				Technique.get(
+					name='{0}_{1}'.format(self.name, x),
+					attack=self.techniques[x][0],
+					speed=self.techniques[x][1],
+					resistance=self.techniques[x][2]
+				)
+				for x in range(len(self.techniques))
+			]
+		elif self.ranks > len_seq:
+			from .tools import split_list
+			split = split_list( sequence )
+			aux = []
+			for x in split:
+				x.reverse()
+				# TO DO: split technique with steps from direction and power
+	
 	def check_consistency(self):
 		return (sum(self.ranks),)*3 == add_triplets([t.as_list() for t in self.techniques])
 	
 	def __init__(self, **kwargs):
+		# initiating data members
 		self.name = kwargs.get('name', 'default_minimum')
 		self.ranks = 0 # filled by calling from_sequence()
 		self.directions = [] # filled by calling from_sequence()
 		self.techniques = [] # filled by calling from_sequence()
-		self.from_sequence( kwargs.get('sequence', [1]) )
+		# initializing
+		if 'techniques' in kwargs:
+			self.from_techniques(kwargs.get('techniques'))
+		else:
+			self.from_sequence( kwargs.get('sequence', [1]) )
 	
 	def __repr__(self):
 		return '{0} ({1} ranks)'.format(self.name, len(self.ranks))
@@ -65,6 +103,16 @@ class Style:
 		return '\n'.join(msg)
 
 ################################################################################
+dragon_styles = [
+	Style( name='カリン-Karin', sequence=[6,42,51] ),
+	Style( name='武天老師-Mutenroushi', sequence=[8,4,6,10] ),
+	Style( name='武泰斗-Mutaito', sequence=[8,10,4] ),
+	Style( name='亀仙流-Kame', sequence=[11] ),
+	Style( name='鶴仙流-Tsuru', sequence=[21] ),
+	Style( name='孫悟飯-Son Gohan', sequence=[10,12] ),
+	Style( name='桃白白-Tao Paipai', sequence=[5,5] ),
+	Style( name='孫悟空-Son Goku', sequence=[10,8] ),
+]
 kihap_styles = [
 	Style(name='K1', sequence=[1]),
 	Style(name='K2', sequence=[2]),
